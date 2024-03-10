@@ -6,14 +6,14 @@ import { useDebouncedCallback } from 'use-debounce';
 
 //Search is a client component
 export default function Search({ placeholder }: { placeholder: string }) {
-  const searchParams =useSearchParams();//acess params from client
+  const searchParams =useSearchParams();//access params from client
   const pathname=usePathname();
   const {replace}=useRouter();
 
   const handleSearch=useDebouncedCallback((term)=>{
-    console.log(`Serching... ${term}`);
-
     const params=new URLSearchParams(searchParams);
+    params.set('page','1');//reset page no to 1 when user types new qiery
+
     //save queries and delete empty ones
     if (term){
       params.set('query',term);
